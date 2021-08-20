@@ -14,21 +14,21 @@ try:
     i = 0
     while i < 10:
         # Send data to the multicast group
-        print(sys.stderr, 'sending "%s"' % message)
+        print('sending "%s"' % message)
         sent = sock.sendto(message.encode(), multicast_group)
 
         # Look for responses from all recipients
         while True:
-            print(sys.stderr, 'waiting to receive')
+            print('waiting to receive')
             try:
                 data, server = sock.recvfrom(16)
             except socket.timeout:
-                print(sys.stderr, 'timed out, no more responses')
+                print('timed out, no more responses')
                 i +=1
                 break
             else:
-                print(sys.stderr, 'received "%s" from %s' % (data, server))
+                print('received "%s" from %s' % (data, server))
 
 finally:
-    print(sys.stderr, 'closing socket')
+    print('closing socket')
     sock.close()
